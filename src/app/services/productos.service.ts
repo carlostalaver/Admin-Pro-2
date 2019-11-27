@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Producto, DetalleProducto } from '../interfaces/info-pagina-interface';
+import { IProducto, IDetalleProducto } from '../interfaces/info-pagina-interface';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable({
@@ -8,19 +8,20 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ProductosService {
   cargando = true;
-  productos: Producto[] = [];
-  productosFiltrados: Producto[] = null;
+  productos: IProducto[] = [];
+  productosFiltrados: IProducto[] = null;
 
   constructor(private http: HttpClient) {
-    this.cargarProducto();
-   }
+    this.cargarProducto().then(() => {
+      console.log('promesa resuelta ', this.productos);
+    });
+  }
 
-
-  private cargarProducto() {
+  private cargarProducto(): Promise<void> {
 
     return new Promise((resolve, reject) => {
       this.http.get('https://angular-html-abc32.firebaseio.com/productos_idx.json')
-        .subscribe((resp: Producto[]) => {
+        .subscribe((resp: IProducto[]) => {
           this.productos = resp;
           this.cargando = false;
           resolve();
@@ -28,32 +29,31 @@ export class ProductosService {
     });
   }
 
-  getProductId(id: string): Observable<DetalleProducto> {
-    return this.http.get(`https://angular-html-abc32.firebaseio.com/productos/${id}.json`) as Observable<DetalleProducto> ;
+  getProductId(id: string): Observable<IDetalleProducto> {
+    return this.http.get(`https://angular-html-abc32.firebaseio.com/productos/${id}.json`) as Observable<IDetalleProducto>;
   }
-
-
 
   buscarProducto(termino: string) {
     if (this.productos.length === 0) {
-      this.cargarProducto().then( () => {
-        this.filtarProducto(termino);
+      this.cargarProducto().then(() => {
+        this.filtarProducto(termino); // di no tengo datos en this.productos espera a que los haya para poder ejecutar this.filtrarProducto
       });
     } else {
       this.filtarProducto(termino);
     }
   }
 
-  filtarProducto(termino: string) {
-   this.productosFiltrados = [];
-   termino = termino.toLocaleLowerCase();
-   if (termino) {
-    this.productosFiltrados =  this.productos.filter( p => {
-      return (p.categoria.toLocaleLowerCase().indexOf(termino) >= 0 || p.titulo.toLocaleLowerCase().indexOf(termino) >= 0);
-    });
-   } else {
-    this.productosFiltrados = this.productos;
-   }
-   console.log(' filtrados', this.productosFiltrados);
+  /* Se ejecutará si y solo si this.producto tiene productos*/
+  private filtarProducto(termino: string) {
+    this.productosFiltrados = [];
+    termino = termino.toLocaleLowerCase();
+    if (termino) {
+      this.productosFiltrados = this.productos.filter(p => {
+        return (p.categoria.toLocaleLowerCase().indexOf(termino) >= 0 || p.titulo.toLocaleLowerCase().indexOf(termino) >= 0);
+      });
+    } else {
+      this.productosFiltrados = this.productos;
+    }
+    console.log(' filtrados', this.productosFiltrados);
   }
 }

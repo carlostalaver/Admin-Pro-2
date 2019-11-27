@@ -6,7 +6,7 @@
   animation-fill-mode: both;
 }
 
-
+/*Obligatorio*/
 @media (print), (prefers-reduced-motion: reduce) {
   .animated {
     -webkit-animation-duration: 1ms !important;
@@ -17,7 +17,9 @@
     animation-iteration-count: 1 !important;
   }
 }
+/*End Obligatorio*/
 
+/*FadeIn mi animacion*/
 @-webkit-keyframes fadeIn {
   from {
     opacity: 0;
@@ -42,12 +44,12 @@
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
 }
+/*End FadeIn mi animacion*/
 
-
-/*
-  Color del Loading
-*/
+/* Color del Loading: Este codigo css es para el spinner o loading que se mostrará para indicarle al usuario que se estan
+   cargando los datos*/
 svg path,
-svg rect{
+svg rect {
   fill: black;
 }
+/*FIn estilos spinner loading*/

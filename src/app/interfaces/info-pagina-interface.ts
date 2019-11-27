@@ -1,5 +1,5 @@
 
-export interface InfoPaginaInterface {
+export interface IInfoPaginaInterface {
   titulo: string;
   email: string;
   nombre_corto: string;
@@ -11,14 +11,14 @@ export interface InfoPaginaInterface {
   equipo_trabajo: any[];
 }
 
-export interface Producto {
+export interface IProducto {
   categoria: string;
   cod: string;
   titulo: string;
   url: string;
 }
 
-export interface DetalleProducto {
+export interface IDetalleProducto {
   categoria: string;
   desc1: string;
   desc2: string;

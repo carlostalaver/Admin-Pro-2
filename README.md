@@ -30,6 +30,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## La BBDD está en `firebase` angular-html
 
 la cuenta es carttux28@gmail.com 
+https://angular-html-abc32.firebaseio.com/equipo.json colocando esto en navegador mostrará los datos de EQUIPO en formato json, ojo el .json es solo para solicitar los datos
 
 ## Tips interesantes de este proyecto
 * **Para las animaciones** con `animated`, se de ir a [animated](https://daneden.github.io/animate.css/) descargar el codigo css y copiar el codigo que se desea para una animación en particular, para ver ejemplo revisar el archivo style.css de este proyecto.
@@ -46,4 +47,8 @@ la cuenta es carttux28@gmail.com
 <input (keydown.f4)="...">
 ```
 
+## Snipper o loading: en siguiente link se puede probar y/u observar la imagen del snipper al cargar los datos desde un servicio.
+```
+https://codepen.io/Klerith/pen/RZpwKm
+```
 
