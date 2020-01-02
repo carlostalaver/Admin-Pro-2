@@ -1,30 +1,34 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+// Rutas
 import { AppRoutingModule } from './app-routing.module';
+
+// Modulos
+import { ServicesModule } from './services/services.module';
+
+// Componentes
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { PortafolioComponent } from './pages/portafolio/portafolio.component';
-import { AboutComponent } from './pages/about/about.component';
-import { ItemComponent } from './pages/item/item.component';
-import { HttpClientModule } from '@angular/common/http';
-import { SearchComponent } from './pages/search/search.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './login/register/register.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { PagesComponent } from './pages/pages.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    PortafolioComponent,
-    AboutComponent,
-    ItemComponent,
-    SearchComponent
+    LoginComponent,
+    RegisterComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    FormsModule,
+    ServicesModule,
+    ReactiveFormsModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
